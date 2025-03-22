@@ -1,0 +1,128 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;GROUP 5
+    2 00000000         ;Assignment1
+    3 00000000         ;QUESTION : Find the number BB inside address from locat
+                       ion 0x20000000 until 0x20000008 and move it to new addre
+                       ss started at 0x2000000A.
+    4 00000000         
+    5 00000000                 AREA             assignment1, CODE, READONLY
+    6 00000000                 EXPORT           __main
+    7 00000000                 ENTRY
+    8 00000000         
+    9 00000000         __main
+   10 00000000 F240 0000       MOVW             R0, #0x0000
+   11 00000004 F2C2 0000       MOVT             R0, #0x2000 ;Set R0 as pointer 
+                                                            for 0x20000000_OLD 
+                                                            LOCATION
+   12 00000008 F240 010A       MOVW             R1, #0x000A
+   13 0000000C F2C2 0100       MOVT             R1, #0x2000 ;Set R1 as pointer 
+                                                            for 0x2000000A_NEW 
+                                                            LOCATION
+   14 00000010 F240 0404       MOVW             R4, #0x0004
+   15 00000014 F2C2 0400       MOVT             R4, #0x2000 ;Set R4 as pointer 
+                                                            for 0x20000004 to s
+                                                            tore the next value
+                                                             0xBBBB
+   16 00000018 F64B 36BB       MOV              R6, #0xBBBB
+   17 0000001C         
+   18 0000001C 6026            STR              R6, [R4]    ;Store data in R6 a
+                                                            t starting pointer 
+                                                            0x20000004
+   19 0000001E F89F 3002       LDRB             R3, MyData  ;Insert input value
+                                                             BB to R3 
+   20 00000022 BB      MyData  DCB              0xBB
+   21 00000023         
+   22 00000023         
+   23 00000023 00 4598 loop    CMP              R8, R3      ;Compare the input 
+                                                            value in R3 and dat
+                                                            a in R8
+   24 00000026 D002            BEQ              next1       ;If R8 = R3 go to n
+                                                            ext1  
+   25 00000028 F810 8B01       LDRB             R8,[R0], #1 ;Load the counter v
+                                                            alue from data in R
+                                                            0 to the R8  
+   26 0000002C E7FA            B                loop        ;Is the counter = B
+                                                            B?   
+   27 0000002E         
+   28 0000002E F881 8000 
+                       next1   STRB             R8, [R1]    ;Store the data in 
+                                                            R8 to the new locat
+                                                            ion
+   29 00000032         
+   30 00000032         
+   31 00000032 E7FE    stop    B                stop
+   32 00000034         
+   33 00000034                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\assignment1.d -o.\objects\assignment1.o -I.\RTE\_Target_
+1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include -IC:\Keil_v5\ARM\PAC
+K\ARM\CMSIS\5.4.0\Device\ARM\ARMCM3\Include --predefine="__EVAL SETA 1" --prede
+fine="__UVISION_VERSION SETA 526" --predefine="_RTE_ SETA 1" --predefine="ARMCM
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+3 SETA 1" --list=.\listings\assignment1.lst assignment1.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+MyData 00000022
+
+Symbol: MyData
+   Definitions
+      At line 20 in file assignment1.s
+   Uses
+      At line 19 in file assignment1.s
+Comment: MyData used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 9 in file assignment1.s
+   Uses
+      At line 6 in file assignment1.s
+Comment: __main used once
+assignment1 00000000
+
+Symbol: assignment1
+   Definitions
+      At line 5 in file assignment1.s
+   Uses
+      None
+Comment: assignment1 unused
+loop 00000024
+
+Symbol: loop
+   Definitions
+      At line 23 in file assignment1.s
+   Uses
+      At line 26 in file assignment1.s
+Comment: loop used once
+next1 0000002E
+
+Symbol: next1
+   Definitions
+      At line 28 in file assignment1.s
+   Uses
+      At line 24 in file assignment1.s
+Comment: next1 used once
+stop 00000032
+
+Symbol: stop
+   Definitions
+      At line 31 in file assignment1.s
+   Uses
+      At line 31 in file assignment1.s
+Comment: stop used once
+6 symbols
+340 symbols in table
