@@ -52,7 +52,7 @@ At line 24 and 26 from figure 1, after the loaded value is updated at R8, the CM
 
 So, by using the conditions for branches, which are the BEQ and B, we can make any decision based on our desired result. When the BEQ is executed, the flag in core xPSR will update the Z value equal to 1 because it detects the same value. But if the value in R8 and R3 is not the same, it will set the N flag.
 
-## 3. Debugging explanation
+### Debugging explanation
 
 - For the data and code that we have design above, we need to save, build and the debugging the coding.
 - Then, after we are debugging, we obtained the data in memory windows. After that, we do the step process to find our objective which is to find number BB in `0x20000000` until `0x20000008` as shown in figure below:
@@ -68,5 +68,5 @@ Figure 1: Data that obtained after debugging the codes in Memory 1
 - As we can see that the value number BB in Register R3 and Register R8 move to the new address which is started in `0x2000000A` which is R1.
 - We also can see that the value of SP in Register R13 which is `0x20000408`, the value of LR in Register R14 equal to `0x000003C5`, the value of PC in Register R15 which is = `0x0000042A` and lastly is `0x61000000` as known as the value of xPSR.
 
-## Gif Presentation
+### Gif Presentation
 ![Debugging Animation](images/bit-manipulation-asm.gif "Animation of Debugging Process")
